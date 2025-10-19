@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Reading Room</title>
+  <link rel="stylesheet" href="reader.css" />
+</head>
+
+<!-- A CDN (Content Delivery Network) is a network of servers around the world that delivers web content (like JavaScript libraries, CSS files, images) quickly to users.
+
+Instead of hosting a library yourself, you can load it from a CDN.-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+
+<script src="reader.js"></script>
+
+<body>
+
+  <div class="reader-container">
+    <div class="reader-header">
+      <h2 id="doc-title">Document Title</h2>
+      <div class="reader-controls">
+        <button onclick="prevPage()">⬅️</button>
+        <span id="page-info">
+          Page 1 / 1
+        </span>
+
+        <button onclick="nextPage()">
+          ➡️
+        </button>
+
+        <button onclick="zoomIn()">
+          ➕ Zoom
+        </button>
+
+        <button onclick="zoomOut()">
+          ➖ Zoom
+        </button>
+      </div>
+    </div>
+
+    <canvas id="pdf-render"></canvas>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+
+  <script src="reader.js">
+
+  </script>
+
+</body>
+</html>

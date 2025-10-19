@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>My Documents | DocuNest</title>
+    <link rel="stylesheet" href="css/my-documents.css">
+  </head>
+
+  <body>
+    <div class="main-container">
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h2>My Vault</h2>
+        <ul class="nav-section">
+          <li onclick="window.location.href='vault.html'">⬅ Back</li>
+        </ul>
+      </div>
+
+      <!-- Content Area -->
+      <div class="content">
+        <h2>My Documents</h2>
+
+        <!-- Uploaded files list -->
+        <div id="fileList" class="file-list"></div>
+
+        <!-- Upload section -->
+        <div class="upload-container">
+          <h3>Upload Document</h3>
+
+          <div class="upload-info">
+            <div class="file-type">
+              <span class="icon">🖼️</span> Images  
+              <br><small>PNG, JPG, GIF</small>
+            </div>
+
+            <div class="file-type">
+              <span class="icon">📄</span> PDFs  
+              <br><small>.pdf files only</small>
+            </div>
+          </div>
+
+          <div class="upload-box" id="drop-area">
+            <p>📤 Drag & drop to upload<br><span>or <a href="#">browse</a></span></p>
+          </div>
+
+          <input type="file" id="uploadInput" accept=".pdf,image/*" multiple hidden>
+          <button class="upload-btn">Upload</button>
+
+          <p class="note">48 uploads remaining this month. Please read our <a href="#">Guidelines</a>.</p>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/my-documents.js"></script>
+  </body>
+</html>

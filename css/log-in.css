@@ -1,0 +1,102 @@
+
+
+/*These methods are applied for all divs*/
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
+}
+
+
+/* The Whole page is using the flex display.*/
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: url('/assets/pictures/mouse-pen-push-pins-white-paper-against-turquoise-background.jpg') no-repeat center center/cover;
+}
+
+.left-side, .right-side {
+  /* Using flex:1 to share the space equally*/
+  flex: 1;
+}
+
+.left-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f4f4;
+}
+
+.right-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e0e0e0;
+}
+
+.right-side img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+
+.login-container{
+  /* this class can be used for a form (collecting User DATA)*/
+    background-color: rgba(255, 255, 255, 0.85); /* semi-transparent white */
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  z-index: 1; /* make sure it’s above the background */
+}
+
+.login-container h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+.login-container form input,
+.login-container form button {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.login-container form input {
+  border: 1px solid #ccc;
+}
+
+.login-container form button {
+  /* Class can be used for a button*/
+  background-color: #0077cc;
+  color: white;
+  font-size: 18px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  margin-top: 8px;
+  
+}
+
+.login-container form button:hover {
+  background-color: #005fa3;
+}
+
+.login-container p {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.login-container a {
+  color: #0077cc;
+  text-decoration: none;
+}
+
+
+
