@@ -1,6 +1,7 @@
 <?php
 // login.php - FIXED VERSION (no database connection)
 session_start(); // Only start session, no database
+require_once 'includes/functions.php';
 
 // Check for flash messages
 $flash = $_SESSION['flash'] ?? null;
@@ -8,6 +9,9 @@ unset($_SESSION['flash']);
 
 // Also check for URL error parameter
 $error = $_GET['error'] ?? null;
+
+// Generate CSRF token
+$csrf_token = generateCSRFToken();
 ?>
 
 <!DOCTYPE html>
@@ -57,12 +61,13 @@ $error = $_GET['error'] ?? null;
       <?php endif; ?>
       
       <form method="POST" action="processes/login_process.php">
+        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
         <input type="email" name="email" placeholder="Email Address" required>
         <input type="password" name="password" placeholder="Password" required>
         <button type="submit">Log In</button>
       </form>
 
-      <p>Don't have an account? <a href="signup.php">Sign up</a></p>
+      <p>Don't have an account? <a href="sign-up.php">Sign up</a></p>
     </div>
   </div>
 

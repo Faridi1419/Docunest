@@ -3,13 +3,24 @@
 session_start();
 require_once '../includes/auth.php';
 require_once '../includes/session.php';
+require_once '../includes/functions.php';
 
 global $session;
 $auth = new Auth();
 $auth->setSession($session);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'] ?? '';
+    // Validate CSRF token
+    if (!validateCSRFToken($_POST['csrf_token'] ?? '')) {
+        $_SESSION['flash'] = [
+            'type' => 'error',
+            'message' => 'Invalid request. Please try again.'
+        ];
+        header("Location: ../log-in.php");
+        exit();
+    }
+    
+    $email = sanitizeInput($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
     
     $result = $auth->login($email, $password);

@@ -10,6 +10,9 @@ $session->redirectIfLoggedIn('vault.php');
 
 // Retrieve flash message set by processes/signup_process.php
 $flash = $session->getFlash();
+
+// Generate CSRF token
+$csrf_token = generateCSRFToken();
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +40,8 @@ $flash = $session->getFlash();
             </div>
         <?php endif; ?>
 
-    <form method="POST" action="/processes/signup_process.php">
+    <form method="POST" action="processes/signup_process.php">
+        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
 
     <?php if ($flash): ?>
         <div class="<?php echo ($flash['type'] == 'error' ? 'alert-error' : 'alert-success'); ?>">

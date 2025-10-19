@@ -115,60 +115,9 @@ function getAlertStyles() {
     ';
 }
 
-function isLoggedIn() {
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-    return isset($_SESSION['user_id']) && isset($_SESSION['logged_in']);
-}
+// Session functions moved to Session class - use $session object instead
 
-function redirectIfNotLoggedIn($redirectTo = 'login.php') {
-    if (!isLoggedIn()) {
-        header("Location: $redirectTo");
-        exit();
-    }
-}
-
-function redirectIfLoggedIn($redirectTo = 'vault.php') {
-    if (isLoggedIn()) {
-        header("Location: $redirectTo");
-        exit();
-    }
-}
-
-function getUserID() {
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-    return $_SESSION['user_id'] ?? null;
-}
-
-function getUserEmail() {
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-    return $_SESSION['email'] ?? null;
-}
-
-function getUserFullName() {
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-    return ($_SESSION['first_name'] ?? '') . ' ' . ($_SESSION['last_name'] ?? '');
-}
-
-function getUserFirstName() {
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-    return $_SESSION['first_name'] ?? '';
-}
-
-function debug($data) {
-    echo '<pre>';
-    print_r($data);
-    echo '</pre>';
-}
+// Debug function removed for production security
 
 function generateRandomString($length = 10) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -178,6 +127,23 @@ function generateRandomString($length = 10) {
         $randomString .= $characters[rand(0, $charactersLength - 1)];
     }
     return $randomString;
+}
+
+function generateCSRFToken() {
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    if (!isset($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+    return $_SESSION['csrf_token'];
+}
+
+function validateCSRFToken($token) {
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    return isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $token);
 }
 
 function formatDate($date, $format = 'F j, Y') {
